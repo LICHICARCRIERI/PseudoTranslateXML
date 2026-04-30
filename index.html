@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>XML Anonymizer</title>
+  <title>PseudoTranslate</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -300,24 +300,24 @@
 <header>
   <div class="logo">
     <div class="logo-icon">X/</div>
-    <h1>XML <span>Anonymizer</span></h1>
+    <h1>Pseudo<span>Translate</span></h1>
   </div>
-  <span class="badge">v1.0</span>
+  <span class="badge">v1.1</span>
 </header>
 
 <main>
   <div class="toolbar">
     <button class="btn btn-primary" onclick="convert()">
-      ▶ Convertir
+      ▶ Convert
     </button>
     <button class="btn btn-ghost" onclick="clearAll()">
-      ✕ Limpiar
+      ✕ Clean
     </button>
     <div class="toolbar-sep"></div>
-    <span class="status-pill" id="statusPill">Esperando input…</span>
-    <div class="copy-feedback" id="copyFeedback">✓ Copiado!</div>
+    <span class="status-pill" id="statusPill">Waiting input…</span>
+    <div class="copy-feedback" id="copyFeedback">✓ Copied!</div>
     <button class="btn btn-success" onclick="copyOutput()" id="copyBtn">
-      ⎘ Copiar output
+      ⎘ Copy output
     </button>
   </div>
 
@@ -333,9 +333,9 @@
       </div>
       <textarea
         id="inputXml"
-        placeholder='Pegá tu XML acá...
+        placeholder='Paste you XML here...
 
-Ejemplo:
+Example:
   <String source="Expert">Expert</String>'
         oninput="onInputChange()"
         spellcheck="false"
@@ -347,24 +347,23 @@ Ejemplo:
       <div class="panel-header">
         <div class="panel-label">
           <span class="dot green"></span>
-          Output — XML anonimizado
+          Output — PseudoTranslated XML 
         </div>
         <span class="char-count" id="outputCount">0 chars</span>
       </div>
       <textarea
         id="outputXml"
         readonly
-        placeholder="El resultado aparece acá…"
+        placeholder="Here is the result…"
         spellcheck="false"
       ></textarea>
     </div>
   </div>
 </main>
 
-<div id="toast">✓ Copiado al portapapeles</div>
+<div id="toast">✓ Copied to clipboard</div>
 
 <footer>
-  <span class="footer-info">Reemplaza el contenido entre ><  con x — espacios incluidos</span>
   <span class="footer-info" id="stringsCount">—</span>
 </footer>
 
