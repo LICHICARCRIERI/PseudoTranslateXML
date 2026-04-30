@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -311,10 +311,10 @@
       ▶ Convert
     </button>
     <button class="btn btn-ghost" onclick="clearAll()">
-      ✕ Clean
+      ✕ Clear
     </button>
     <div class="toolbar-sep"></div>
-    <span class="status-pill" id="statusPill">Waiting input…</span>
+    <span class="status-pill" id="statusPill">Waiting for input…</span>
     <div class="copy-feedback" id="copyFeedback">✓ Copied!</div>
     <button class="btn btn-success" onclick="copyOutput()" id="copyBtn">
       ⎘ Copy output
@@ -327,13 +327,13 @@
       <div class="panel-header">
         <div class="panel-label">
           <span class="dot"></span>
-          Input — XML original
+          Input — Original XML
         </div>
         <span class="char-count" id="inputCount">0 chars</span>
       </div>
       <textarea
         id="inputXml"
-        placeholder='Paste you XML here...
+        placeholder='Paste your XML here...
 
 Example:
   <String source="Expert">Expert</String>'
@@ -347,14 +347,14 @@ Example:
       <div class="panel-header">
         <div class="panel-label">
           <span class="dot green"></span>
-          Output — PseudoTranslated XML 
+          Output — PseudoTranslated XML
         </div>
         <span class="char-count" id="outputCount">0 chars</span>
       </div>
       <textarea
         id="outputXml"
         readonly
-        placeholder="Here is the result…"
+        placeholder="Result appears here…"
         spellcheck="false"
       ></textarea>
     </div>
@@ -364,6 +364,7 @@ Example:
 <div id="toast">✓ Copied to clipboard</div>
 
 <footer>
+  <span class="footer-info">Replaces content between &gt;&lt; with x — spaces included</span>
   <span class="footer-info" id="stringsCount">—</span>
 </footer>
 
@@ -371,13 +372,13 @@ Example:
   function onInputChange() {
     const input = document.getElementById('inputXml').value;
     document.getElementById('inputCount').textContent = input.length + ' chars';
-    document.getElementById('statusPill').textContent = 'Listo para convertir…';
+    document.getElementById('statusPill').textContent = 'Ready to convert…';
   }
 
   function convert() {
     const input = document.getElementById('inputXml').value.trim();
     if (!input) {
-      document.getElementById('statusPill').textContent = '⚠ Pegá un XML primero';
+      document.getElementById('statusPill').textContent = '⚠ Paste an XML first';
       return;
     }
 
@@ -391,11 +392,10 @@ Example:
       const outputLen = result.length;
       document.getElementById('outputCount').textContent = outputLen + ' chars';
 
-      // Count how many strings were processed
       const matches = result.match(/<String /g);
       const count = matches ? matches.length : 0;
-      document.getElementById('stringsCount').textContent = count + ' strings procesados';
-      document.getElementById('statusPill').textContent = '✓ Conversión exitosa';
+      document.getElementById('stringsCount').textContent = count + ' strings processed';
+      document.getElementById('statusPill').textContent = '✓ Conversion successful';
 
       panelOutput.classList.remove('processing');
     }, 150);
@@ -433,7 +433,7 @@ Example:
       document.execCommand('copy');
       showToast();
     } catch(e) {
-      alert('No se pudo copiar. Seleccioná el texto manualmente.');
+      alert('Could not copy. Please select the text manually.');
     }
     ta.setAttribute('readonly', true);
     window.getSelection().removeAllRanges();
@@ -446,12 +446,13 @@ Example:
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
   }
+
   function clearAll() {
     document.getElementById('inputXml').value = '';
     document.getElementById('outputXml').value = '';
     document.getElementById('inputCount').textContent = '0 chars';
     document.getElementById('outputCount').textContent = '0 chars';
-    document.getElementById('statusPill').textContent = 'Esperando input…';
+    document.getElementById('statusPill').textContent = 'Waiting for input…';
     document.getElementById('stringsCount').textContent = '—';
   }
 
