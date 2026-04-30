@@ -403,11 +403,11 @@ Ejemplo:
   }
 
   function anonymizeXml(xml) {
-    // Replace content between > and < with x's, preserving character count
-    // BUT preserve newlines (\n) and carriage returns (\r) as-is
-    return xml.replace(/>([^<]+)</g, (match, content) => {
+    // Only replace content between > and </ (closing tag)
+    // This avoids touching indentation/whitespace between sibling tags
+    return xml.replace(/>([^<]+)<\//g, (match, content) => {
       const replaced = content.replace(/[^\n\r]/g, 'x');
-      return '>' + replaced + '<';
+      return '>' + replaced + '</';
     });
   }
 
